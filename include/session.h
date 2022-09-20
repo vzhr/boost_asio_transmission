@@ -118,7 +118,8 @@ private:
   void read_start()
   {
     attempt_sync();
-    read_sync_header();
+    // read_sync_header();
+    async_read_buffer_.read_all( boost::bind(&Session::read_callback, this, _1));
   }
   void read_callback(const Buffer& buffer)
   {
